@@ -41,4 +41,4 @@ symbols = ['x', 'o']
 counter= 0
 while game_continue(board):
     player(symbols[ counter% 2])
-print_field(board,False)
+print_field(board, False)
