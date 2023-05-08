@@ -12,15 +12,20 @@ def print_field(board, num):
             print('-' * 7)
 
 
-def game_continue(board):
+def win(board):
     for i in range(3):
         if board[0][i] == board[1][i] and board[0][i] == board[2][i] and board[0][i] != ' ':
-            return False
+            return board[1][i]
         if board[i][0] == board[i][1] and board[i][0] == board[i][2] and board[i][0] != ' ':
-            return False
+            return board[i][1]
     if ((board[0][0] == board[1][1] == board[2][2]) or (board[2][0] == board[1][1] == board[0][2])) and board[1][1] != ' ':
-        return False
-    return True
+        return board[1][1]
+    for stroke in board:
+        for cell in stroke:
+            if cell==" ":
+                return ""
+    return "Ничья"
+
 
 
 def player(symdol):
@@ -39,6 +44,11 @@ board=[
     ]
 symbols = ['x', 'o']
 counter= 0
-while game_continue(board):
+while win(board)=='':
     player(symbols[ counter% 2])
+    counter+= 1
 print_field(board, False)
+if win(board)=="Ничья":
+    print('e dfc у вас ничья!')
+else:
+     print("поздрашиляем! вы выиграли:",win(board))
