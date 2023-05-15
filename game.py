@@ -1,4 +1,8 @@
+
+import os
+
 def print_field(board, num):
+    clear()
     print('-------')
     for i in range (9):
         if i % 3 == 0 :
@@ -36,19 +40,44 @@ def player(symdol):
         number = int(input(" введите номер ячейки: ")) - 1
     board[number // 3][number % 3] = symdol
 
+def win(board):
+    for i in range(3):
+        if board [0][i] == board[1][i] and board[0][i] == board[2][i] and board[0][i] !=" ":
+            return board [1][i]
+         if board[i][0] == board[i][1] and board[i][0] == board[i][2] and board[0][i] != " ":
+            return board[i][1]
+    if (( board [0][0] ==board[1][1] == board[2][2])or (board[2][0] ==board[1][1] == board[0][2])) and board[]
+        return board[1][1]
+    for stoke in board:
+        for cell in stoke:
+            if cell ==" ":
+                return " "
+    return "Ничья"
 
-board=[
-    [' ', ' ', ' '],
-    [' ', ' ', ' '],
-    [' ', ' ', ' ']
-    ]
-symbols = ['x', 'o']
-counter= 0
-while win(board)=='':
-    player(symbols[ counter% 2])
-    counter+= 1
-print_field(board, False)
-if win(board)=="Ничья":
-    print('e dfc у вас ничья!')
-else:
-     print("поздрашиляем! вы выиграли:",win(board))
+
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def comp (symbol):
+    for i in range(3):
+       for k 
+
+restart = 'да'
+while restart == 'да':
+
+    board=[
+        [' ', ' ', ' '],
+        [' ', ' ', ' '],
+        [' ', ' ', ' ']
+        ]
+    symbols = ['x', 'o']
+    counter= 0
+    while win(board)=='':
+        player(symbols[ counter% 2])
+        counter+= 1
+    print_field(board, False)
+    if win(board)=="Ничья":
+        print('e dfc у вас ничья!')
+    else:
+         print("поздрашиляем! вы выиграли:",win(board))
+    restart = input("сыграть есще раз?(да или нет)").lower()
