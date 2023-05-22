@@ -57,11 +57,43 @@ def win(board):
 
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
-
-def comp (symbol):
+def comp(symbol):
+    # 1. Если может победить, то выигрывает
     for i in range(3):
-       for k 
+        for k in range(3):
+            if board[i][k] == ' ':
+                board[i][k] = symbol
+                if win(board) == symbol:
+                    return
+                else:
+                    board[i][k] = ' '
 
+
+
+    # 2. Если может проиграть, избегает этого
+    if symbol == 'x':
+        s = 'o'
+    else:
+        s = 'x'
+    for i in range(3):
+        for k in range(3):
+            if board[i][k] == ' ':
+                board[i][k] = s
+                if win(board) == s:
+                    board[i][k] = symbol
+                    return
+                else:
+                    board[i][k] = ' '
+    #3 центр
+    if board[1][1] == ' ':
+        board[1][1] = symbol
+        return
+    #4 Любая свободная
+    for i in range(3):
+        for k in range(3):
+            if board[i][k] == " ":
+                board[i][k] = symbol
+                return
 restart = 'да'
 while restart == 'да':
 
@@ -75,6 +107,8 @@ while restart == 'да':
     while win(board)=='':
         player(symbols[ counter% 2])
         counter+= 1
+        comp(symbols[counter % 2])
+        counter += 1
     print_field(board, False)
     if win(board)=="Ничья":
         print('e dfc у вас ничья!')
